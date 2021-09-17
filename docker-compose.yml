@@ -1,0 +1,25 @@
+version: '2.1'
+volumes:
+    data: {}
+services:
+    donkeycar:
+        build:
+            context: donkeycar
+            dockerfile: Dockerfile.template
+        environment:
+            SERVICE_NAME: 'donkeycar'
+            UDEV: '1'
+        privileged: true
+        volumes:
+            - "data:/app/data"
+        devices:
+            - "/dev:/dev" 
+            - "/opt/vc:/opt/vc"   
+        labels:
+            io.balena.features.dbus: '1'
+            io.balena.features.kernel-modules: '1'
+            io.balena.features.firmware: '1'            
+    nginx:
+        build: ./nginx
+        ports:
+            - 80:80
