@@ -1,4 +1,4 @@
-#Welcome to DonkeyCar on balena!  
+# Welcome to DonkeyCar on balena!  
 
 A [DonkeyCar](https://www.donkeycar.com) is a small autonomous vehicle project built on an RC Car chassis, that uses computer vision and machine learning techniques to convert the platform into a self-driving vehicle.  It uses a Raspberry Pi 3 or Jetson Nano, a camera, a motor driver, and of course the DonkeyCar application to perform this task.  There is also a "virtual" version that you can use to get started, prior to even building the physical version.  A "virtual" DonkeyCar looks rather like a video game, and it connects to a DonkeyCar Simulator where it can be trained on data, and then just like the physical version, it can attempt to drive itself in the virtual world.  
 
@@ -13,7 +13,7 @@ This Readme and Repo cover the *`Physical Build of a DonkeyCar using a Raspberry
 
 Also note, the DonkeyCar project has their own [detailed documentation available](https://docs.donkeycar.com), that goes into more advanced topics and gives thorough descriptions of the architecture, machine learning and training scenarios, performance and tuning of models, and many more topics.  This Readme is simply intended to make it easy to get started, and once you have the core concepts down, be sure to refer to their documentation for more advanced guidance. 
 
-##Intro
+## Intro
 
 Waymo, Tesla, Cruise, and other companies already have self-driving vehicles deployed out in the world around us.  With this project, it is possible to build a miniature version of an autonomous vehicle, intended to race around a track, which is perfect for learning how the core concepts of computer vision and machine learning play a role in self-driving vehicles!
 
@@ -38,7 +38,7 @@ However, let's also cover a few basics.  The car can be driven through a web bro
 The process in the middle - the Training - takes a very long time on a Raspberry Pi.  Analyzing all of the data that got recorded during driving, creating a neural network, and iterating on that data over and over through what are called epochs can easily take hours on the Pi.  And once complete, there is no guarantee the DonkeyCar will even be able to drive safely and accurately!  So, to improve that feedback loop and to reduce the iteration time, most people find it better to drive the DonkeyCar and collect the data, but then transfer that resulting "Tub" of data to a cloud server or a PC with a GPU, and perform the training there.  Once it completes (hopefully much quicker!), the resulting output of the process is the *model* file just like mentioned above, and that model can be transferred back to the Pi.  Then, the DonkeyCar can try to drive using it (hopefully it drives good!).
 
 
-##Build
+## Build
 
 We are not going to cover the physical construction of the DonkeyCar in this Readme, because that is [covered in detail in their Documentation](https://docs.donkeycar.com/guide/build_hardware/).  The basic premise however, is that you will remove the plastic car body from the RC Car chassis, and replace it with the DonkeyCar frame.  Place the Raspberry Pi on the frame, the motor driver on the frame, and the Pi Camera in the holder slot near the top of the handle.  Run the jumper wires from the Pi to the motor relay board.  Connect the camera via it's ribbon cable.  Secure everything in place with included screws, and the DonkeyCar is complete!
 
@@ -50,7 +50,6 @@ Here is where we vary from their Documentation and begin to "balenafy" the proje
  - However, in this repo, we have bundled all of those bits into a Dockerfile, and instead of performing all of those manual installation steps, you can instead just click this button to launch a build in the cloud, provision a balena device, download an SD Card image, and end up with the same result:
 
 [![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/dtischler/balena-DonkeyCar-Physical)
-
 
 More specifically:
 1. Click on the Blue Button just above.
@@ -68,7 +67,7 @@ More specifically:
 Once the Pi has finished downloading the container, it is time to move on to the next section!
 
 
-##Drive
+## Drive
  
 With your DonkeyCar fully constructed, and the container downloaded and running, it's time to test out a few basics before you go for your first drive.
 
@@ -102,13 +101,13 @@ As mentioned earlier, the official DonkeyCar documentation is more detailed, so 
 <picture here>
 
   
-##Train
+## Train
 
-Now that we have a bit of sample data recorded and saved, it's time to begin training our model.  Remember, as mentioned above, it is *NOT* very efficient to train directly on the Raspberry Pi, and using a cloud server or a desktop PC with a GPU will be MUCH faster.  However, simply for learning purposes and to keep things organized and in one place, we will in this situation train directly on the Pi.  It could literally take 8 to 10 hours or more, so, grab a cup of tea, and sip it VERY slowly.  Or do something else in the meantime.  
+Now that we have a bit of sample data recorded and saved, it's time to begin training our model.  Remember, as mentioned above, it is **NOT** very efficient to train directly on the Raspberry Pi, and using a cloud server or a desktop PC with a GPU will be MUCH faster.  However, simply for learning purposes and to keep things organized and in one place, we will in this situation train directly on the Pi.  It could literally take 8 to 10 hours or more, so, grab a cup of tea, and sip it VERY slowly.  Or do something else in the meantime.  
 
 Back in the terminal session in balenaCloud, and still within the DonkeyCar container, run `donkey train --data ./mydata`. Now go do something else.
 
 Fast forward 10 or so hours, and returning to balenaCloud, you should see that process has completed.  The output of all that hard work is the model file.  By default, it should be named xxxxxxxxx.h5
 
 
-##Conclusions
+## Conclusions
