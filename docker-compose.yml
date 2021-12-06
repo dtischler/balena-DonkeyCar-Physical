@@ -11,15 +11,19 @@ services:
             UDEV: '1'
         privileged: true
         volumes:
-            - "data:/app/data"
+            - "data:/usr/src/app"
         devices:
             - "/dev:/dev" 
             - "/opt/vc:/opt/vc"   
         labels:
             io.balena.features.dbus: '1'
             io.balena.features.kernel-modules: '1'
-            io.balena.features.firmware: '1'            
-    nginx:
-        build: ./nginx
+            io.balena.features.firmware: '1'
         ports:
-            - 80:80
+            - 9091:9091/tcp
+            - 9091:9091/udp
+            - 80:8887                        
+#    nginx:
+#        build: ./nginx
+#        ports:
+#            - 80:80
