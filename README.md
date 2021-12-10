@@ -90,7 +90,7 @@ Type in `cd mycar && python3 manage.py drive` and press Enter. The script will l
 
 ![](/images/img2.png)
 
-Check the IP address of your Raspberry Pi in the balenaCloud dashboard.  Make note of this IP.  Open a web browser, and go to http://<ip-address-of-your-pi>/drive.  In my example, this would be 192.168.0.232/drive.
+Check the IP address of your Raspberry Pi in the balenaCloud dashboard.  Make note of this IP.  Open a web browser, and go to `http://ip-address-of-your-pi/drive`.  In my example, this would be `http://192.168.0.232/drive`.
 
 ![](/images/img3.png)
 
@@ -134,7 +134,7 @@ With the model now ready (hope you slept well), you can try to let the DonkeyCar
 - Turn on the ESC switch, which sets the car live.
 - In balenaCloud dashboard, open up a terminal session to the DonkeyCar container.
 - Enter `python manage.py drive --model ~/mycar/models/myawesomepilot.h5`
-- Navigate to http://<ip-address-of-your-pi>/drive once again.
+- Navigate to `http://ip-address-of-your-pi/drive` once again.
 - Get ready, the vehicle is about to launch!  On the left, click the dropdown menu for `Mode and Pilot`, and choose `Local Pilot`.
 - The DonkeyCar should begin to make it's way around your track.
 - Be ready to grab it in case of emergency!
