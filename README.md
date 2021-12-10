@@ -1,6 +1,8 @@
 # Welcome to DonkeyCar on balena!  
 
-A [DonkeyCar](https://www.donkeycar.com) is a small autonomous vehicle project built on an RC Car chassis, that uses computer vision and machine learning techniques to convert the platform into a self-driving vehicle.  It uses a Raspberry Pi 3 or Jetson Nano, a camera, a motor driver, and of course the DonkeyCar application to perform this task.  There is also a "virtual" version that you can use to get started, prior to even building the physical version.  A "virtual" DonkeyCar looks rather like a video game, and it connects to a DonkeyCar Simulator where it can be trained on data, and then just like the physical version, it can attempt to drive itself in the virtual world.  
+A [DonkeyCar](https://www.donkeycar.com) is a small autonomous vehicle project built on an RC Car chassis, that uses computer vision and machine learning techniques to convert the platform into a self-driving vehicle.  It uses a Raspberry Pi 3 or Jetson Nano, a camera, a motor driver, and of course the DonkeyCar application to perform this task.  There is also a "virtual" version that you can use to get started, prior to even building the physical version.  A "virtual" DonkeyCar looks rather like a video game, and it connects to a DonkeyCar Simulator where it can be trained on data, and then just like the physical version, it can attempt to drive itself in the virtual world.
+
+![](https://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg)
 
 To cover these different scenarios there are 4 main Repositories for the project:
 
@@ -82,15 +84,15 @@ With the cars wheels lifted, connect the vehicle battery pack if it is not alrea
 
 Next, in balenaCloud, on the Device Details page, open up an SSH session to the DonkeyCar container with the Terminal interface at the bottom right portion of the screen:
 
-<picture here>
+![](/images/img1.png)
 
 Type in `cd mycar && python3 manage.py drive` and press Enter. The script will launch, and take a moment to complete, but will eventually reach `Starting vehicle at 20 Hz`
 
-<picture here>
+![](/images/img2.png)
 
 Check the IP address of your Raspberry Pi in the balenaCloud dashboard.  Make note of this IP.  Open a web browser, and go to http://<ip-address-of-your-pi>/drive.  In my example, this would be 192.168.0.232/drive.
 
-<picture here>
+![](/images/img3.png)
 
 Now, double check that the DonkeyCar is secure, well-balanced, and those wheels are off the ground.  In the throttle and steering applet on that page, click and drag just a tiny bit up from center, and your wheels should start spinning!  You can click and drag a bit left, and the steering should match.  If not, you'll want to double check your wiring, check the logs in the balenaCloud dashboard for any errors, and make sure everything has power.  If everything works as expected, congratulations, the DonkeyCar is ready to drive.
 
@@ -104,7 +106,7 @@ As mentioned earlier, the official DonkeyCar documentation is more detailed, so 
 - Over in the balenaCloud Dashboard, in that Terminal window, press `Control-C` on the keyboard to exit out of the DonkeyCar application.
 - You will see all of the data get written out in a table, and the raw files are stored in the `data` directory inside of that `mycar` folder.
 
-<picture here>
+![](/images/img4.png)
 
   
 ## Train
@@ -113,7 +115,11 @@ Now that we have a bit of sample data recorded and saved, it's time to begin tra
 
 Back in the terminal session in balenaCloud, and still within the DonkeyCar container, run `donkey train --tub ./data --model ./models/myawesomepilot.h5`. Now go do something else.
 
+![](/images/img5.png)
+
 Fast forward 10 or so hours, and returning to balenaCloud, you should see that process has completed.  The output of all that hard work is the model file.  Double check that everything completed successfully, and you should have a file sitting in the `models` directory called `myawesomepilot.h5`
+
+![](/images/img6.png)
 
 ### Speeding Up Training
 
@@ -128,9 +134,12 @@ With the model now ready (hope you slept well), you can try to let the DonkeyCar
 - Turn on the ESC switch, which sets the car live.
 - In balenaCloud dashboard, open up a terminal session to the DonkeyCar container.
 - Enter `python manage.py drive --model ~/mycar/models/myawesomepilot.h5`
+- Navigate to http://<ip-address-of-your-pi>/drive once again.
+- Get ready, the vehicle is about to launch!  On the left, click the dropdown menu for `Mode and Pilot`, and choose `Local Pilot`.
 - The DonkeyCar should begin to make it's way around your track.
-- Be ready to grab it in case of emergency.
+- Be ready to grab it in case of emergency!
 
+![](/images/img7.png)
 
 ## Conclusions
 
