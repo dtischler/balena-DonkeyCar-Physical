@@ -128,7 +128,7 @@ Knowing full well that training on the Pi is not ideal, we simply want to demons
 
 ## Drive Autonomously
 
-With the model now ready (hope you slept well), you can try to let the DonkeyCar now navigate your racetrack autonously.  Fair warning, mine did not drive very well with only 10 laps of data, so, be ready to grab it quickly if it starts heading for a wall!
+With the model now ready (hope you slept well), you can try to let the DonkeyCar now navigate your racetrack autonomously.  Fair warning, mine did not drive very well with only 10 laps of data, so, be ready to grab it quickly if it starts heading for a wall!
 
 - Place the DonkeyCar on your track.
 - Turn on the ESC switch, which sets the car live.
