@@ -133,7 +133,7 @@ With the model now ready (hope you slept well), you can try to let the DonkeyCar
 - Place the DonkeyCar on your track.
 - Turn on the ESC switch, which sets the car live.
 - In balenaCloud dashboard, open up a terminal session to the DonkeyCar container.
-- Enter `python manage.py drive --model ~/mycar/models/myawesomepilot.h5`
+- Enter `cd mycar && python3 manage.py drive --model models/myawesomepilot.h5`
 - Navigate to `http://ip-address-of-your-pi/drive` once again.
 - Get ready, the vehicle is about to launch!  On the left, click the dropdown menu for `Mode and Pilot`, and choose `Local Pilot`.
 - The DonkeyCar should begin to make it's way around your track.
