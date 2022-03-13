@@ -11,31 +11,24 @@ RUN apt-get update && apt-get -y install build-essential python3 python3-dev pyt
 
 RUN apt-get update && apt-get install -y xfce4 xinit xserver-xorg xserver-xorg-video-fbdev xinit pciutils xfonts-100dpi xfonts-75dpi xfonts-scalable xterm xfce4-terminal xserver-xorg-input-evdev dbus-x11 matchbox-keyboard firefox-esr && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#RUN pip3 install --upgrade pip setuptools wheel
-#RUN pip3 install Cython h5py==2.10.0 pybind11 scikit-build picamera
-#RUN pip3 install keras_applications==1.0.8 --no-deps
-#RUN pip3 install keras_preprocessing==1.1.0 --no-deps
-#RUN pip3 install six wheel mock imgaug docopt gdown numpy==1.21.4
-
-#RUN gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
-#RUN pip3 install tensorflow-2.2.0-cp37-cp37m-linux_armv7l.whl wrapt --upgrade --ignore-installed numpy==1.21.4
-
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
+ARG venv_name=env
+RUN python3 -m venv env --system-site-packages
 RUN git clone https://github.com/autorope/donkeycar && cd donkeycar && git checkout master
-RUN cd donkeycar && export READTHEDOCS=True && pip install -e .[pi]
-RUN . /opt/venv/bin/activate && donkey createcar
+RUN . $venv_name/bin/activate && cd donkeycar && export READTHEDOCS=True && pip install -e .[pi]
+RUN . $venv_name/bin/activate && pip install --upgrade pip setuptools wheel
+RUN . $venv_name/bin/activate && pip install h5py==2.10.0
+RUN . $venv_name/bin/activate && pip install keras_applications==1.0.8 --no-deps
+RUN . $venv_name/bin/activate && pip install keras_preprocessing==1.1.0 --no-deps
+RUN . $venv_name/bin/activate && pip install six wheel mock imgaug docopt gdown numpy==1.21.4
+RUN . $venv_name/bin/activate && gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
+RUN . $venv_name/bin/activate && pip install tensorflow-2.2.0-cp37-cp37m-linux_armv7l.whl wrapt --upgrade --ignore-installed numpy==1.21.4
 
-RUN pip3 install pandas gdown
-RUN gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
-RUN pip3 install tensorflow-2.2.0-cp37-cp37m-linux_armv7l.whl
 
+RUN . $venv_name/bin/activate && cd donkeycar && donkey createcar --path mycar
+RUN echo "source /usr/src/app/env/bin/activate" >> ~/.bashrc
 COPY start.sh start.sh
-
-CMD ["/bin/bash"]
-# RUN cd mycar && python3 manage.py drive
+CMD /bin/bash
+# RUN cd /root/mycar && python3 manage.py drive
 
 
 

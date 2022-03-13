@@ -11,7 +11,7 @@ services:
             UDEV: '1'
         privileged: true
         volumes:
-            - "data:/usr/src/app"
+            - "data:/root"
         devices:
             - "/dev:/dev" 
             - "/opt/vc:/opt/vc"   
